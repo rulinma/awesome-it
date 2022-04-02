@@ -1,4 +1,4 @@
-# IT（Information Technology）精华
+# IT（Information Technology）
 
 [TOC]
 
