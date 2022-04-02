@@ -925,6 +925,10 @@ Linux是Java程序员必须掌握的核心工具。
 
 1. [WordPress](https://cn.wordpress.org) WordPress是使用PHP语言开发的博客平台，用户可以在支持PHP和MySQL数据库的服务器上架设属于自己的网站。也可以把 WordPress当作一个内容管理系统（CMS）来使用。
 
+#### .net
+
+#### Delphi
+
 ### 推荐考试认证
 
 1. OCJP Oracle公司的Java工程师认证。通过该考试表明较好的掌握Java基础知识。
