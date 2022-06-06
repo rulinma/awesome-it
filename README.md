@@ -106,6 +106,14 @@
     * 可用性（A）：在集群中一部分节点故障后，集群整体是否还能响应客户端的读写请求。（对数据更新具备高可用性）
     * 分区容错性（P）：以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择。
 
+#### 影子表
+
+影子表指的是一张真实表“背后”创建的表。当完成建表操作后，可以通过一个原子的重命名操作切换影子表和原表
+
+	drop table if exists user_new, user_old;
+	create table user_new like user;
+	rename table user to user_old, user_new to user;
+
 #### 非关系数据库
 
 1. MongoDB
@@ -356,6 +364,38 @@
 2. [Varnish](http://varnish-cache.org) Varnish HTTP Cache.
 3. [Squid](http://www.squid-cache.org) Squid is a caching proxy for the Web supporting HTTP, HTTPS, FTP, and more.(Squid是支持HTTP，HTTPS，FTP等的Web的缓存代理。)
 
+#### 缓存常见问题及解决
+
+* 穿透：缓存查询不到，在DB中进行查找。恶意进行大数据量查询是，会宕数据库。
+	* 查询不到时存储一个有短时间过期的空值。
+	* 使用bitmap设置好可能值，不是可能值则返回。
+* 雪崩：大数据量缓存数据同时失效，导致请求全部转发DB，进而导致DB崩溃。
+	* 不要统一时间大数据量同时失效，可以加个随机值。
+	* 热点数据，可以设置永不过期（key最好有规则，方便找出，否则可能有后患）。
+* 击穿：热点key，失效时被大量访问，此时没有处理的话，会同时打到DB，造成压力。
+   * 使用互斥锁，持有锁的从DB更新数据到缓存，没有拿到锁的，返回null。
+   * 开个线程检查过期时间，快过期时（比如1分钟）进行更新。
+   * 使用hystrix等进行降级策略处理。
+
+#### 浏览器缓存
+浏览器缓存设置及优先级：Last-Modified < ETag < Expires < Cache-Control
+
+##### 小结
+
+常规缓存懒加载，热点数据尽量预热加载。
+
+### 数据库及缓存一致性
+
+* 双写不一致
+	*  使用canal进行数据库数据订阅，刷新到缓存。
+
+
+### 网络
+
+#### Socket
+Socket是为了方便使用TCP或UDP而抽象出来的一层，位于应用层和传输控制层之间的一组接口，提供一套调用TCP/IP协议的API。
+
+
 ### 消息
 
 #### RabbitMQ
@@ -394,6 +434,11 @@
 3. JProfile
 4. Eclicpse Memory Analyzer
 5. [Leakcanary](https://github.com/square/leakcanary) A memory leak detection library for Android and Java.(适用于Android和Java的内存泄漏检测库。)
+6. https://gceasy.io/
+
+#### JVM小结
+
+目前常规使用JDK8，使用G1比较常见，主要优点是可以设置最大GC时间，能比较好的减少长时间回收时间停止现象，实现低延迟。使用ZGC的Java版本需要较新，
 
 ### SpringClound
 
@@ -551,6 +596,29 @@
 1. [JumpServer](http://www.jumpserver.org/) 是全球首款完全开源的堡垒机,使用GNU GPL v2.0开源协议,是符合 4A 的专业运维安全审计系统。
 2. [图书][海量运维、运营规划之道](http://product.dangdang.com/23380755.html)
 3. [图书][网站运维技术与实践]
+
+### 负载均衡
+
+#### Nginx
+
+* 7层交换
+
+#### LVS（Linux Virtual Server）
+
+* 4层交换
+
+#### F5（硬件）/ 商用Array
+#### HAProxy
+#### DNS及CDN
+#### KeepAlived
+#### Squid
+#### Varnish
+#### VIP
+#### 防火墙
+#### 接入层和应用层网关
+#### 负载均衡小结
+基本网站Nginx即可，如果要扩展LVS或者F5/Array的，应该是比较中大型网站了，应该有专业的运维和网络工程师了，正常架构等人员了解即可。
+
 
 ### 监控
 
