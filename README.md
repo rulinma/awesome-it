@@ -733,13 +733,25 @@ Socket是为了方便使用TCP或UDP而抽象出来的一层，位于应用层�
 
 1. [Hypertext Transfer Protocol -- HTTP/1.1](https://www.w3.org/Protocols/rfc2616/rfc2616.html)
 
+#### WebSocket
+
 #### 前端框架和库
+
+##### 常用库
+
+1. lodash
+2. moment
+3. axios
 
 ##### React
 
 ##### VUE
 
 ##### Angular
+
+#### 图片库
+
+1. http://www.fontawesome.com.cn/
 
 ##### Bootstrap
 
