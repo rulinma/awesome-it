@@ -377,6 +377,8 @@
    * 开个线程检查过期时间，快过期时（比如1分钟）进行更新。
    * 使用hystrix等进行降级策略处理。
 
+#### 一致性Hash及虚拟节点
+
 #### 浏览器缓存
 浏览器缓存设置及优先级：Last-Modified < ETag < Expires < Cache-Control
 
