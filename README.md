@@ -413,6 +413,14 @@ Socket是为了方便使用TCP或UDP而抽象出来的一层，位于应用层�
     * [图书][Kafka权威指南](http://product.dangdang.com/25211884.html)
     * [文章][kafka入门：简介、使用场景、设计原理、主要配置及集群搭建（转）](https://www.cnblogs.com/likehua/p/3999538.html)
 
+##### 幂等
+
+enable.idempotence=true
+
+#### Kafka 工具
+* [Kafka Eagle](https://github.com/smartloli/EFAK)
+* [Kafka Tool](https://www.kafkatool.com/)
+
 #### RocketMQ
 
 1. RocketMQ
