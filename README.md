@@ -1035,7 +1035,8 @@ Linux是Java程序员必须掌握的核心工具。
 8. [spring-boot](https://github.com/spring-projects/spring-boot)
 9. [dubbo](https://github.com/apache/incubator-dubbo)  Apache Dubbo (incubating) is a high-performance, java based, open source RPC framework.
 10. [interviews](https://github.com/kdn251/interviews)  Everything you need to know to get the job.
-11. [GitHub][成为一名专业程序员](https://github.com/stanzhai/be-a-professional-programmer) 成为专业程序员路上用到的各种优秀资料、神器及框架。
+11. [成为一名专业程序员](https://github.com/stanzhai/be-a-professional-programmer) 成为专业程序员路上用到的各种优秀资料、神器及框架。
+12. [JavaGuide](https://github.com/Snailclimb/JavaGuide)
 
 ### 推荐源码
 
