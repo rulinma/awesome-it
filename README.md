@@ -601,6 +601,8 @@ enable.idempotence=true
 
 1. [JMeter](http://jmeter.apache.org) The Apache JMeter™ application is open source software, a 100% pure Java application designed to load test functional behavior and measure performance. It was originally designed for testing Web Applications but has since expanded to other test functions.(pache JMeter™应用程序是开源软件，是一种100％纯Java应用程序，旨在加载测试功能行为和测量性能。 它最初是为测试Web应用程序而设计的，但后来扩展到其他测试功能。)
    * [图书][全栈性能测试修炼宝典 JMeter实战](http://product.dangdang.com/24048538.html)
+   * GUI
+   * CMD: bin/jmeter -n -t test.jmx -l test.jtl
 
 ### ABTest
 
@@ -939,6 +941,8 @@ Linux是Java程序员必须掌握的核心工具。
 
 1. [Maven](http://maven.apache.org) Apache Maven is a software project management and comprehension tool.(Apache Maven是一个软件项目管理和理解工具。)
    * [图书][Maven实战](http://product.dangdang.com/20977961.html)
+   * 实战中一遍提供基础parent依赖包，使用dependencyManagement管理所需依赖，并提供基础的dependencies，其他项目使用此为基础，根据需要引用需要的库。
+   
 2. [Ant](http://ant.apache.org) Apache Ant is a Java library and command-line tool whose mission is to drive processes described in build files as targets and extension points dependent upon each other.(Apache Ant是一个Java库和命令行工具，其任务是将构建文件中描述的进程作为目标和扩展点相互依赖。)
 3. [Gradle](https://gradle.org/) Build Tool.(构建工具)
 
@@ -1224,6 +1228,13 @@ An open platform to connect, manage, and secure microservices.
 #### Side Car
 
 ### 网络及工具
+
+#### IP查询
+* 淘宝IP地址库: http://ip.taobao.com
+* https://www.ipip.net/ip.html
+* IP138: https://www.ip138.com
+* GeoIP: https://geoip.com
+* 纯真IP库: http://www.cz88.net
 
 #### 流量复制工具（TcpCopy）
 
