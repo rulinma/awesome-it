@@ -245,6 +245,7 @@
     JSP：JavaServer Pages是一种用于开发包含动态内容的网页的技术。 与包含始终保持相同的静态内容的纯HTML页面不同，JSP页面可以根据任意数量的变量项更改其内容，包括用户的身份，用户的浏览器类型，用户提供的信息以及 用户做出的选择。
     JSP is a specification, not a product.
     JSP是规范，而不是产品。
+
     * [视频][尚学堂Jsp快速入门（高淇）](http://study.163.com/course/courseMain.htm?courseId=1067001)
 
 3. WEB容器
@@ -269,6 +270,16 @@
    * [图书]精通Spring
 2. [MyBatis](http://www.mybatis.org/mybatis-3)
    * MyBatis Plus
+   * [聊聊MyBatis缓存机制](https://tech.meituan.com/2018/01/19/mybatis-cache.html)
+     - 一级缓存
+       - MyBatis一级缓存的生命周期和SqlSession一致。
+       - MyBatis一级缓存内部设计简单，只是一个没有容量限定的HashMap，在缓存的功能性上有所欠缺。
+       - MyBatis的一级缓存最大范围是SqlSession内部，有多个SqlSession或者分布式的环境下，数据库写操作会引起脏数据，建议设定缓存级别为Statement。
+     - 二级缓存
+       - MyBatis的二级缓存相对于一级缓存来说，实现了SqlSession之间缓存数据的共享，同时粒度更加的细，能够到namespace级别，通过Cache接口实现类不同的组合，对Cache的可控性也更强。
+       - MyBatis在多表查询时，极大可能会出现脏数据，有设计上的缺陷，安全使用二级缓存的条件比较苛刻。
+       - 在分布式环境下，由于默认的MyBatis Cache实现都是基于本地的，分布式环境下必然会出现读取到脏数据，需要使用集中式缓存将MyBatis的Cache接口实现，有一定的开发成本，直接使用Redis、Memcached等分布式缓存可能成本更低，安全性也更高。
+     - 本文对介绍了MyBatis一二级缓存的基本概念，并从应用及源码的角度对MyBatis的缓存机制进行了分析。最后对MyBatis缓存机制做了一定的总结，个人建议MyBatis缓存特性在生产环境中进行关闭，单纯作为一个ORM框架使用可能更为合适。
 3. [Hibernate](http://hibernate.org)
 4. [Struts](https://struts.apache.org)
 
@@ -357,7 +368,7 @@
 
 1. [Redis](https://redis.io) Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.(Redis是一个开源（BSD许可），内存数据结构存储，用作数据库，缓存和消息代理。)
    * [Redis Desktop Manager](https://redisdesktop.com/)  访问Redis的工具。(Redis Desktop Manager (aka RDM) — is a fast open source Redis database management application for Windows, Linux and MacOS.)
-   * [图书][Redis实战](http://product.dangdang.com/23800641.html)
+   * [Redis实战](http://product.dangdang.com/23800641.html)
 
 #### MemCache
 
@@ -460,16 +471,19 @@ enable.idempotence=true
 1. [SpringCloud](http://projects.spring.io/spring-cloud)
 2. [SpringBoot](http://spring.io/projects/spring-boot) Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run".(Spring Boot可以轻松创建独立的，生产级的基于Spring的应用程序，您可以“即刻运行”。)
 3. [Eureka](https://github.com/Netflix/eureka) AWS Service registry for resilient mid-tier load balancing and failover.(AWS服务注册，用于弹性中间层负载平衡和故障转移。)
-4. [Zuul](https://github.com/Netflix/zuul) Zuul is a gateway service that provides dynamic routing, monitoring, resiliency, security, and more.(Zuul是一种网关服务，提供动态路由，监控，弹性，安全性等。)
-5. [Zipkin](https://github.com/openzipkin/zipkin) Zipkin is a distributed tracing system.(Zipkin是一种分布式跟踪系统。)
-6. [Hystrix](https://github.com/Netflix/Hystrix) Hystrix is a latency and fault tolerance library designed to isolate points of access to remote systems, services and 3rd party libraries, stop cascading failure and enable resilience in complex distributed systems where failure is inevitable.(Hystrix是一个延迟和容错库，旨在隔离对远程系统，服务和第三方库的访问点，停止级联故障，并在复杂的分布式系统中实现弹性，在这些系统中，故障是不可避免的。)
-7. Sentinal
+4. [Nacos](https://nacos.io/zh-cn/index.html) 一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
+   1. 作为配置中心使用
+   2. 服务的注册和发现
+5. [Zuul](https://github.com/Netflix/zuul) Zuul is a gateway service that provides dynamic routing, monitoring, resiliency, security, and more.(Zuul是一种网关服务，提供动态路由，监控，弹性，安全性等。)
+6. [Zipkin](https://github.com/openzipkin/zipkin) Zipkin is a distributed tracing system.(Zipkin是一种分布式跟踪系统。)
+7. [Hystrix](https://github.com/Netflix/Hystrix) Hystrix is a latency and fault tolerance library designed to isolate points of access to remote systems, services and 3rd party libraries, stop cascading failure and enable resilience in complex distributed systems where failure is inevitable.(Hystrix是一个延迟和容错库，旨在隔离对远程系统，服务和第三方库的访问点，停止级联故障，并在复杂的分布式系统中实现弹性，在这些系统中，故障是不可避免的。)
+8. Sentinal
+9. Spring Cloud Gateway
 
 ### 统一配置中心
 
 1. [Apollo](https://github.com/xianglesong/learning-javas/blob/master/platform/Apollo.md)  这款配置中心的功能不错，推荐一下。
      (Apollo阿波罗是携程框架部门研发的分布式配置中心，能够集中化管理应用不同环境、不同集群的配置，配置修改后能够实时推送到应用端，并且具备规范的权限、流程治理等特性，适用于微服务配置管理场景。)
-2. Nacos
 
 ### Trace及链路跟踪
 
@@ -1003,6 +1017,14 @@ Linux是Java程序员必须掌握的核心工具。
 
 1. [GitHub][Interviews](https://github.com/kdn251/interviews) Everything you need to know to get the job.(找工作需要了解的一切。)
 
+2. ### Java
+
+   #### volatile
+
+   - 原子性：原子性指的是一个操作是不可中断的，即使在多线程环境下，一个操作一旦开始就不会被其他线程影响！volatile不保证
+   - 可见性：可见性指的是当一个线程修改了某个共享变量的值，其他线程能够马上感知到这个修改的值。
+   - 有序性：有序性即程序执行的顺序是否按照代码的先后顺序执行。
+
 ## 综合
 
 ### 推荐其他语言
@@ -1132,10 +1154,6 @@ Linux是Java程序员必须掌握的核心工具。
 9. [图书][松本行弘的程序世界](http://product.dangdang.com/22471151.html)
 10. [图书][编程珠玑](http://product.dangdang.com/23640352.html)
 
-### 推荐精华文档
-
-1. 缓存
-    * [缓存那些事](https://tech.meituan.com/cache_about.html)
 
 ### 推荐微信公众号
 
@@ -1153,43 +1171,32 @@ Linux是Java程序员必须掌握的核心工具。
 8. [极光](https://www.jiguang.cn) 第三方消息推送服务。
 9. 神策
 
-## 架构、框架及工具
+## 架构设计
 
-### 核心概念
-
-#### 微服务
+### 微服务架构
 
 微服务架构（通常简称为微服务）是指开发应用所用的一种架构形式。通过微服务，可将大型应用分解成多个独立的组件，其中每个组件都有各自的责任领域。在处理一个用户请求时，基于微服务的应用可能会调用许多内部微服务来共同生成其响应。
 
+### API设计
+
 #### 幂等
 
-#### 灰度发布
+### DevOps
+就是开发（Development）、测试（QA）、运维（Operations）这三个领域的合并。
 
-### 数据库迁移
+#### 继续集成（CICD）
+CICD：持续集成（CI），持续交付（CD）是指持续集成交付部署，是一套流程实现软件的构建测试部署的自动化。
 
-#### [数据库秒级平滑扩容架构方案](https://cloud.tencent.com/developer/article/1048650)
+#### 发布
+* 蓝绿发布：蓝绿部署需要按照服务当前版本所占用的资源状况为服务新版本申请同样的资源规格，部署完毕之后将流量整体切换到服务新版本。
+* A/B测试：A/B 测试基于用户请求的元信息将流量路由到新版本，换句话说，就是可以根据请求内容来动态路由。
+* 金丝雀发布：金丝雀发布允许引流一小部分流量到服务新版本，待验证通过后，逐步调大流量，直至切流完毕，期间可伴随着新版本的扩容，旧版本的缩容操作，达到资源利用率最大化
 
+#### 挡板
 
-### Spring
+#### Mock Server
 
-### MyBatis
-
-1. [聊聊MyBatis缓存机制](https://tech.meituan.com/2018/01/19/mybatis-cache.html)
-	* 一级缓存
-		* MyBatis一级缓存的生命周期和SqlSession一致。
-		* MyBatis一级缓存内部设计简单，只是一个没有容量限定的HashMap，在缓存的功能性上有所欠缺。
-		* MyBatis的一级缓存最大范围是SqlSession内部，有多个SqlSession或者分布式的环境下，数据库写操作会引起脏数据，建议设定缓存级别为Statement。
-	* 二级缓存
-		* MyBatis的二级缓存相对于一级缓存来说，实现了SqlSession之间缓存数据的共享，同时粒度更加的细，能够到namespace级别，通过Cache接口实现类不同的组合，对Cache的可控性也更强。
-		* MyBatis在多表查询时，极大可能会出现脏数据，有设计上的缺陷，安全使用二级缓存的条件比较苛刻。
-		* 在分布式环境下，由于默认的MyBatis Cache实现都是基于本地的，分布式环境下必然会出现读取到脏数据，需要使用集中式缓存将MyBatis的Cache接口实现，有一定的开发成本，直接使用Redis、Memcached等分布式缓存可能成本更低，安全性也更高。
-	* 本文对介绍了MyBatis一二级缓存的基本概念，并从应用及源码的角度对MyBatis的缓存机制进行了分析。最后对MyBatis缓存机制做了一定的总结，个人建议MyBatis缓存特性在生产环境中进行关闭，单纯作为一个ORM框架使用可能更为合适。
-
-### Docker
-
-### Kubernetes（K8S）
-
-#### minicube
+#### CMDB
 
 ### 云原生（CloudNative）
 * 四要素
@@ -1197,7 +1204,13 @@ Linux是Java程序员必须掌握的核心工具。
 	* 容器化
 	* DevOps
 	* 持续交付
-	
+
+#### Docker
+
+#### Kubernetes（K8S）
+
+#### minicube
+
 ### Serive Mesh（服务网格）
 
 #### Istio
@@ -1208,21 +1221,22 @@ An open platform to connect, manage, and secure microservices.
 * 控制（Control）：应用用户定义的 policy，保证资源在消费者中公平分配。
 * 观察（Observe）：查看服务运行期间的各种数据，比如日志、监控和 tracing，了解服务的运行情况。
 
-
 #### Side Car
 
-### 网络工具
+### 网络及工具
 
 #### 流量复制工具（TcpCopy）
 
-#### Mock Server
-#### 挡板
+### 数据库迁移
 
-#### 异地多活
+* [数据库秒级平滑扩容架构方案](https://cloud.tencent.com/developer/article/1048650)
 
-### Java
+### 缓存
+* [缓存那些事](https://tech.meituan.com/cache_about.html)
 
-#### volatile
-* 原子性：原子性指的是一个操作是不可中断的，即使在多线程环境下，一个操作一旦开始就不会被其他线程影响！volatile不保证
-* 可见性：可见性指的是当一个线程修改了某个共享变量的值，其他线程能够马上感知到这个修改的值。
-* 有序性：有序性即程序执行的顺序是否按照代码的先后顺序执行。
+### 异地多活
+
+* [搞懂异地多活，看这篇就够了](https://mp.weixin.qq.com/s/T6mMDdtTfBuIiEowCpqu6Q	)
+
+* [https://mp.weixin.qq.com/s/hMD-IS__4JE5_nQhYPYSTg](https://mp.weixin.qq.com/s/hMD-IS__4JE5_nQhYPYSTg)
+
