@@ -942,6 +942,7 @@ Linux是Java程序员必须掌握的核心工具。
 1. [Maven](http://maven.apache.org) Apache Maven is a software project management and comprehension tool.(Apache Maven是一个软件项目管理和理解工具。)
    * [图书][Maven实战](http://product.dangdang.com/20977961.html)
    * 实战中一遍提供基础parent依赖包，使用dependencyManagement管理所需依赖，并提供基础的dependencies，其他项目使用此为基础，根据需要引用需要的库。
+   * 可以使用不同profile选择不同repository，也可以使用mirror设置repository。
    
 2. [Ant](http://ant.apache.org) Apache Ant is a Java library and command-line tool whose mission is to drive processes described in build files as targets and extension points dependent upon each other.(Apache Ant是一个Java库和命令行工具，其任务是将构建文件中描述的进程作为目标和扩展点相互依赖。)
 3. [Gradle](https://gradle.org/) Build Tool.(构建工具)
