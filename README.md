@@ -477,6 +477,8 @@ enable.idempotence=true
 5. [Zuul](https://github.com/Netflix/zuul) Zuul is a gateway service that provides dynamic routing, monitoring, resiliency, security, and more.(Zuul是一种网关服务，提供动态路由，监控，弹性，安全性等。)
 6. [Zipkin](https://github.com/openzipkin/zipkin) Zipkin is a distributed tracing system.(Zipkin是一种分布式跟踪系统。)
 7. [Hystrix](https://github.com/Netflix/Hystrix) Hystrix is a latency and fault tolerance library designed to isolate points of access to remote systems, services and 3rd party libraries, stop cascading failure and enable resilience in complex distributed systems where failure is inevitable.(Hystrix是一个延迟和容错库，旨在隔离对远程系统，服务和第三方库的访问点，停止级联故障，并在复杂的分布式系统中实现弹性，在这些系统中，故障是不可避免的。)
+	* 提供Feign的降级处理功能
+
 8. Sentinal
 9. Spring Cloud Gateway
 
@@ -1248,7 +1250,7 @@ An open platform to connect, manage, and secure microservices.
 
 ### 异地多活
 
-* [搞懂异地多活，看这篇就够了](https://mp.weixin.qq.com/s/T6mMDdtTfBuIiEowCpqu6Q	)
+* [搞懂异地多活，看这篇就够了](https://mp.weixin.qq.com/s/T6mMDdtTfBuIiEowCpqu6Q)
 
-* [https://mp.weixin.qq.com/s/hMD-IS__4JE5_nQhYPYSTg](https://mp.weixin.qq.com/s/hMD-IS__4JE5_nQhYPYSTg)
+* [四步构建异地多活](https://mp.weixin.qq.com/s/hMD-IS__4JE5_nQhYPYSTg)
 
