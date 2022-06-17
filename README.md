@@ -402,12 +402,17 @@
 * 双写不一致
 	*  使用canal进行数据库数据订阅，刷新到缓存。
 
-
 ### 网络
+
+#### TCP/IP
 
 #### Socket
 Socket是为了方便使用TCP或UDP而抽象出来的一层，位于应用层和传输控制层之间的一组接口，提供一套调用TCP/IP协议的API。
 
+#### SSL
+
+#### 加密和解密
+* 对称和非对称加密
 
 ### 消息
 
@@ -469,19 +474,11 @@ enable.idempotence=true
 4. [Nacos](https://nacos.io/zh-cn/index.html) 一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
    1. 作为配置中心使用
    2. 服务的注册和发现
-5. [Zuul](https://github.com/Netflix/zuul) Zuul is a gateway service that provides dynamic routing, monitoring, resiliency, security, and more.(Zuul是一种网关服务，提供动态路由，监控，弹性，安全性等。)
+
 6. [Zipkin](https://github.com/openzipkin/zipkin) Zipkin is a distributed tracing system.(Zipkin是一种分布式跟踪系统。)
 7. [Hystrix](https://github.com/Netflix/Hystrix) Hystrix is a latency and fault tolerance library designed to isolate points of access to remote systems, services and 3rd party libraries, stop cascading failure and enable resilience in complex distributed systems where failure is inevitable.(Hystrix是一个延迟和容错库，旨在隔离对远程系统，服务和第三方库的访问点，停止级联故障，并在复杂的分布式系统中实现弹性，在这些系统中，故障是不可避免的。)
 	* 提供Feign的降级处理功能
 
-8. [Sentinal](https://github.com/alibaba/Sentinel)
-	* As distributed systems become increasingly popular, the reliability between services is becoming more important than ever before. Sentinel takes "flow" as breakthrough point, and works on multiple fields including flow control, traffic shaping, circuit breaking and system adaptive protection, to guarantee reliability and resilience for microservices.
-	* [Spring Cloud Alibaba Sentinel](https://github.com/alibaba/spring-cloud-alibaba/wiki/Sentinel)
-	* [在生产环境中使用-Sentinel](https://github.com/alibaba/Sentinel/wiki/%E5%9C%A8%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%B8%AD%E4%BD%BF%E7%94%A8-Sentinel)
-	* [动态规则扩展](https://github.com/alibaba/Sentinel/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%99%E6%89%A9%E5%B1%95)
-
-9. [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway)
-	* This project provides a library for building an API Gateway on top of Spring WebFlux. Spring Cloud Gateway aims to provide a simple, yet effective way to route to APIs and provide cross cutting concerns to them such as: security, monitoring/metrics, and resiliency.
 
 ### 统一配置中心
 
@@ -498,6 +495,21 @@ enable.idempotence=true
    * [文章][BTrace][Java在线问题排查利器之Btrace&Greys](http://tech.lede.com/2017/10/11/rd/server/javaToolsBTrace/)
 
 5. ARMS
+
+### 网关
+
+1. [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway)
+	* This project provides a library for building an API Gateway on top of Spring WebFlux. Spring Cloud Gateway aims to provide a simple, yet effective way to route to APIs and provide cross cutting concerns to them such as: security, monitoring/metrics, and resiliency.
+
+2. [Zuul](https://github.com/Netflix/zuul) Zuul is a gateway service that provides dynamic routing, monitoring, resiliency, security, and more.(Zuul是一种网关服务，提供动态路由，监控，弹性，安全性等。)
+
+### 流量控制，熔断降级
+
+1. [Sentinal](https://github.com/alibaba/Sentinel)
+	* As distributed systems become increasingly popular, the reliability between services is becoming more important than ever before. Sentinel takes "flow" as breakthrough point, and works on multiple fields including flow control, traffic shaping, circuit breaking and system adaptive protection, to guarantee reliability and resilience for microservices.
+	* [Spring Cloud Alibaba Sentinel](https://github.com/alibaba/spring-cloud-alibaba/wiki/Sentinel)
+	* [在生产环境中使用-Sentinel](https://github.com/alibaba/Sentinel/wiki/%E5%9C%A8%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E4%B8%AD%E4%BD%BF%E7%94%A8-Sentinel)
+	* [动态规则扩展](https://github.com/alibaba/Sentinel/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%99%E6%89%A9%E5%B1%95)
 
 ### 定时调度
 
