@@ -414,6 +414,15 @@ Socket是为了方便使用TCP或UDP而抽象出来的一层，位于应用层�
 #### 加密和解密
 * 对称和非对称加密
 
+### 流量复制
+
+1. TCP Copy
+
+### 网络监控
+
+1. TCP Dump
+2. WireShark
+
 ### 消息
 
 #### RabbitMQ
@@ -690,14 +699,6 @@ enable.idempotence=true
 
 1. [HAProxy](http://www.haproxy.org)
 
-### 流量复制
-
-1. TCP Copy
-
-### 网络监控
-
-1. TCP Dump
-2. WireShark
 
 ### Kubernetes(K8s)
 
