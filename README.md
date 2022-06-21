@@ -1203,6 +1203,13 @@ Linux是Java程序员必须掌握的核心工具。
 
 #### 幂等
 
+#### 链路跟踪
+使用http的header，存放traceid进行全链路跟踪。使用MDC设置[traceid][localid]
+
+* rest template
+* feign client
+
+
 ### DevOps
 就是开发（Development）、测试（QA）、运维（Operations）这三个领域的合并。
 
